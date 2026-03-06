@@ -1,6 +1,7 @@
 import { supabase } from "@/lib/supabase"
 import ProductTable from "@/components/ProductTable"
 import Link from "next/link"
+import { Suspense } from "react"
 
 export default async function Home({ searchParams }: any) {
 
@@ -55,13 +56,14 @@ className="bg-blue-500 text-white px-4 py-2 rounded"
 Add Product
 </Link>
 
+<Suspense fallback={<div>Loading table...</div>}>
 <ProductTable
-products={data || []}
+products={data}
 total={count}
 page={page}
 pageSize={pageSize}
 />
-
+</Suspense>
 </div>
 )
 }
